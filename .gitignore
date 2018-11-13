@@ -1,5 +1,5 @@
-*.tmp
 build/
+*.tmp
 gradle.properties
 .gradle/  
 .nb-gradle/  
