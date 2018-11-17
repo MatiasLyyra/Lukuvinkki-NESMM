@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th, .table td {
+    text-align: left;
+}
+
+
+.table thead tr {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #515151;
+    color: white;
+}

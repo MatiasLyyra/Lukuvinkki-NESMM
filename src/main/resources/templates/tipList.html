@@ -1,10 +1,30 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Lukuvinkki</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <p th:text="'Olen lukuvinkki otsikolla, ' + ${title} + '!'" />
+    <div layout:fragment="page_content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Url</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tip : ${tips}">
+                    <td th:text="${tip.getTitle()}"></td>
+                    <td th:text="${tip.getAuthor()}"></td>
+                    <td th:text="${tip.getUrl()}"></td>
+                    <td th:text="${tip.getDescription()}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

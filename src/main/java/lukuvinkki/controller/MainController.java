@@ -1,6 +1,9 @@
 package lukuvinkki.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import lukuvinkki.database.TipDao;
 import lukuvinkki.domain.Tip;
 import org.springframework.stereotype.Controller;
@@ -35,6 +38,19 @@ public class MainController {
            e.printStackTrace();
         }
         return "tipForm";
+   }
+
+   @RequestMapping(value = "/tips", method = RequestMethod.GET)
+   public String viewTips(Model model) {
+        List<Tip> tips = new ArrayList<>();
+        try {
+            tips = tipDao.findAll();
+        } catch (SQLException e) {
+            model.addAttribute("error", "Database error");
+            return "error";
+        }
+        model.addAttribute("tips", tips);
+        return "tipList";
    }
 
 }

@@ -60,8 +60,8 @@ public class TipDao implements Dao<Tip, Integer> {
             ResultSet rs = stmt.executeQuery() ) {
             
             while (rs.next()) {
-                Tip tip = new Tip(rs.getString("title"), rs.getString("author"), rs.getString("url"), rs.getString("description"));
-                tip.setId(rs.getInt("id"));
+                Tip tip = new Tip(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getString("url"), rs.getString("description"));
+                tips.add(tip);
             }
             
         }

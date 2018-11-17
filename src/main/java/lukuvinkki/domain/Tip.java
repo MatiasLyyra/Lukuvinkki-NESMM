@@ -2,7 +2,7 @@ package lukuvinkki.domain;
 
 public class Tip {
 
-    private Integer id;
+    private int id;
     private String title;
     private String author;
     private String url;
@@ -14,11 +14,19 @@ public class Tip {
         this.url = url;
         this.description = description;
     }
+
+    public Tip(int id, String title, String author, String url, String description) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.url = url;
+        this.description = description;
+    }
     public Tip() {
 
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
