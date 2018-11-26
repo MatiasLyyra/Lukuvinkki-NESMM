@@ -11,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class TipController {
@@ -46,6 +49,7 @@ public class TipController {
             tip.addTag(tag);
         }
         tipRepository.save(tip);
+
         return "redirect:/";
    }
 
@@ -56,6 +60,18 @@ public class TipController {
         return "tipList";
    }
    
+
+   @RequestMapping(value = "/tips/{tipId}", method = RequestMethod.POST)
+   public String statusSubmit(@PathVariable Long tipId, Model model){
+       Optional<Tip> optional = tipRepository.findById(tipId);
+       if(optional.isPresent()){
+       Tip tip = optional.get();
+       tip.setStatus(true);
+       tipRepository.save(tip);
+       }
+       return "redirect:/tips";                  
+   }
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchTips(@RequestParam("keyword") String keyword, Model model) {
         

@@ -53,6 +53,7 @@ public class TipStepdefs extends AbstractStepdefs {
         WebElement webElement = driver.findElement(By.linkText("lukuvinkki"));
         webElement.click();
     }
+        
     
 
     @Given("^command search is selected$")
@@ -87,6 +88,12 @@ public class TipStepdefs extends AbstractStepdefs {
         addTip(title, author, url, desc, tags);
     }
     
+
+    @When("^command Mark as Read is selected$")
+    public void command_mark_as_read_is_selected()throws Throwable {
+        WebElement webElement = driver.findElement(By.name("Merkitse luetuksi"));
+        webElement.click();
+
     @When("^search is done with keyword \"([^\"]*)\"$")
     public void command_search_is_selected_with_keyword(String keyword) throws Throwable {
         searchTips(keyword);
@@ -142,6 +149,11 @@ public class TipStepdefs extends AbstractStepdefs {
     public void only_following_tags_are_created(DataTable dt) throws Throwable {
         List<String> tags = dt.asList(String.class);
         assertCreatedTags(tags);
+    }
+    
+    @Then("^page shows tip marked as read$")
+    public void page_shows_tip_as_read()throws Throwable {
+        assertTrue(driver.getPageSource().contains("Luettu"));
     }
 
     @Then("^list contains tip with tag \"([^\"]*)\"$")
