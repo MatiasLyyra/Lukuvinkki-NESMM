@@ -1,42 +1,56 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Lukuvinkki</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css"></link>
-</head>
-<body>
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Title</td>
-                    <td>Author</td>
-                    <td>Url</td>
-                    <td>Description</td>
-                    <td>Tags</td>
-                    <td>Status</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="tip : ${tips}" th:id="'tip-' + ${tip.getId()}" >
-                    <td class="title" th:text="${tip.getTitle()}"></td>
-                    <td class="author" th:text="${tip.getAuthor()}"></td>
-                    <td class="url" th:text="${tip.getUrl()}"></td>
-                    <td class="description" th:text="${tip.getDescription()}"></td>
-                    <td class="tags">
-                        <span class="tag" th:each="tag : ${tip.getTags()}" th:text="${tag.getName()}"></span>
-                    </td>
-                    <td class="status">
-                        <span th:if="${tip.getStatus() == false}">
-                        <form th:action="@{/tips/{tipId}(tipId=${tip.getId()})}" th:method="POST">
-                            <button type="submit" name="markAsRead">Mark as Read</button></span>
-                        </form>
-                        <span th:unless="${tip.getStatus() == false}">Read</span>                      
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragment/base :: head (title='Lukuvinkki')">
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+            <form action="#" th:action="@{/search}" method="post">
+                <table>
+                    <tr>
+                        <td>Haku:</td>
+                        <td><input name="keyword" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit">Hae</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Otsikko</td>
+                        <td>Tekijä</td>
+                        <td>WWW</td>
+                        <td>Sisältö</td>
+                        <td>Tagit</td>
+                        <td>Tehty</td>
+                        <td>Luettu</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tip : ${tips}" th:id="'tip-' + ${tip.getId()}" >
+                        <td class="title" th:text="${tip.getTitle()}"></td>
+                        <td class="author" th:text="${tip.getAuthor()}"></td>
+                        <td class="url" th:text="${tip.getUrl()}"></td>
+                        <td class="description" th:text="${tip.getDescription()}"></td>
+                        <td class="tags">
+                            <span class="tag" th:each="tag : ${tip.getTags()}" th:text="${tag.getName()}"></span>
+                        </td>
+                        <td class="created" th:text="${tip.getCreated()}"></td>
+                        <td class="status">
+                            <span th:if="${tip.getStatus() == false}">
+                                <form th:action="@{/tips/{tipId}(tipId=${tip.getId()})}" th:method="POST">
+                                    <button type="submit" name="markAsRead">Merkitse luetuksi</button></span>
+                                </form>
+                            <span th:unless="${tip.getStatus() == false}">Luettu</span>                      
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
+

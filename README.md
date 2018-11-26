@@ -25,3 +25,5 @@ http://localhost:8080/
 [Backlog](https://docs.google.com/spreadsheets/d/1cA0eJKsMFbv5t4-NO9uqrfpEuOwMUji-7ckIPtxH4fo/edit?usp=sharing)
 
 [Sprint 1](https://docs.google.com/spreadsheets/d/1cA0eJKsMFbv5t4-NO9uqrfpEuOwMUji-7ckIPtxH4fo/edit#gid=1920176515?usp=sharing)
+
+[Sprint 2](https://docs.google.com/spreadsheets/d/1cA0eJKsMFbv5t4-NO9uqrfpEuOwMUji-7ckIPtxH4fo/edit#gid=1900322122?usp=sharing)

@@ -12,6 +12,7 @@ after_failure:
 - chmod +x send.sh
 - "./send.sh failure $WEBHOOK_URL"
 deploy:
+  provider: heroku
   api_key:
     secure: BGkzM6scAq3coIBv3njnk6j9/xBeW8JzgDoNdW05s25+4YnR7EEXmxd9zUp6RJQjSJS44XfiFfhnv5mUi3Zcm5sxrmXsO4Vimp5Dx0tFjlz+B61cR66uKV8zf/Ecmb1kt8uhHTLC817o7f/u2L5qdMNnHJI4vjlvlT4h3B7Vbb73fWPkXRp6ULxRo/WN35fVb+PG7OxbKJCtlpIn4k9mwWRj5GeEsuBZcMAhdSJH0yxSAtWmdITCBIGr0HlBLv839P1Pgo/3j+o+B2gp2CcyfDeTG62E/gBmMYVbOzw5/svG+sfApRu+JB0LFQMmUcbSmbuFOrq2K09AW333pWLWrWKl0xEc5lBO7qZWX2EQVSv5Bifx1fQMy7kLiiv44DzQ18OLLt775mHkBM9t0b+UupA7Drh8GRS4pHE0OLbEulAxe+4A1CgRMgXkrPnrcQqtm+d8vqxgq0HW3Rlda8SXX1cvyz9amFZPr4NfXXB/wBU0UriMC6p7bvlogd7+bvexWawVr6Y3Dxl34D2mUgTaA7B40+g2xfhwPlkUu3HxHx8HIFZ0aONY7DksqotBwdSaxjqGHK941FK2EVcVSS3ZI0BDLRUjoU2xCZvc5XE2lqUZxdUkcs0JfQ3FIEjbV8wPA+Iwlv5I/nEM+dljDDOJ7r3J+Hq56CPP3H6DNQPszaQ=
   app: lukuvinkki-nesmm

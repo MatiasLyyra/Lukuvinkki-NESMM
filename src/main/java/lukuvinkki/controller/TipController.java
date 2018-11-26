@@ -14,19 +14,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class TipController {
-
     @Autowired
     private TipRepository tipRepository;
 
     @Autowired
     private TagRepository tagRepository;
 
+    @GetMapping(value = "/")
+    public String index() {
+        return "index";
+    }
+    
     @RequestMapping(value="/addTip", method=RequestMethod.GET)
     public String tipForm(Model model){
         model.addAttribute("tip", new Tip());
@@ -42,7 +49,8 @@ public class TipController {
             tip.addTag(tag);
         }
         tipRepository.save(tip);
-        return "redirect:index.html";
+
+        return "redirect:/";
    }
 
    @RequestMapping(value = "/tips", method = RequestMethod.GET)
@@ -52,6 +60,7 @@ public class TipController {
         return "tipList";
    }
    
+
    @RequestMapping(value = "/tips/{tipId}", method = RequestMethod.POST)
    public String statusSubmit(@PathVariable Long tipId, Model model){
        Optional<Tip> optional = tipRepository.findById(tipId);
@@ -62,6 +71,34 @@ public class TipController {
        }
        return "redirect:/tips";                  
    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchTips(@RequestParam("keyword") String keyword, Model model) {
+        
+        if (keyword.isEmpty()) {
+            List<Tip> allTips = tipRepository.findAllByOrderByCreatedDesc();
+            model.addAttribute("tips", allTips);
+            return "tipList";
+        }
+        
+        // PRIMARY SEARCH BY TAGS OF TIPS
+        List<Tag> tags = tagRepository.findByNameIgnoreCaseContaining(keyword);
+        List<Tip> primaryTips = new ArrayList<>();
+        for (Tag tag : tags) {
+            tag.getTips().forEach(tip -> primaryTips.add(tip));
+        }
+        Collections.sort(primaryTips, (tip1, tip2) -> tip2.getCreated().compareTo(tip1.getCreated()));
+        
+        // SECONDARY SEARCH BY TITLES AND AUTHORS
+        List<Tip> secondaryTips = tipRepository.findByTitleIgnoreCaseContainingOrAuthorIgnoreCaseContainingOrderByCreatedDesc(keyword, keyword);
+        
+        // MERGE TWO LISTS
+        secondaryTips.removeAll(primaryTips);
+        primaryTips.addAll(secondaryTips);
+        
+        model.addAttribute("tips", primaryTips);
+        return "tipList";
+    }
 
     private List<Tag> getOrCreateTag(List<String> rawTags) {
         List<Tag> tags = new ArrayList<>();

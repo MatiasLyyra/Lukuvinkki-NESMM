@@ -45,6 +45,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile("com.h2database:h2")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	// compile group: 'org.springframework', name: 'spring-web', version: '5.1.2.RELEASE'
     testCompile("org.springframework:spring-test")
     compile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version: '2.27'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: seleniumVersion
