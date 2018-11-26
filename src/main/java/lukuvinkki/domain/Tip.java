@@ -19,9 +19,7 @@ public class Tip {
     private String author;
     private String url;
     private String description;
-    private boolean status;
-    
-    
+
     @Transient
     private String rawTags;
 
@@ -77,15 +75,7 @@ public class Tip {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    public Boolean getStatus(){
-        return status;
-    }
 
-    public void setStatus(boolean status){
-        this.status=status;
-    }
-    
     public void setCreated(Date created) {
         this.created = created;
     }
@@ -134,5 +124,4 @@ public class Tip {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
 }

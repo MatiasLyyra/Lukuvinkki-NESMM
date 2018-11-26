@@ -27,7 +27,6 @@
                         <td>Sisältö</td>
                         <td>Tagit</td>
                         <td>Tehty</td>
-                        <td>Luettu</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,17 +39,9 @@
                             <span class="tag" th:each="tag : ${tip.getTags()}" th:text="${tag.getName()}"></span>
                         </td>
                         <td class="created" th:text="${tip.getCreated()}"></td>
-                        <td class="status">
-                            <span th:if="${tip.getStatus() == false}">
-                                <form th:action="@{/tips/{tipId}(tipId=${tip.getId()})}" th:method="POST">
-                                    <button type="submit" name="markAsRead">Merkitse luetuksi</button></span>
-                                </form>
-                            <span th:unless="${tip.getStatus() == false}">Luettu</span>                      
-                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </body>
 </html>
-
