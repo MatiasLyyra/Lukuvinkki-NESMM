@@ -132,8 +132,6 @@ public class Tip {
         comment.setTip(this);
     }
 
-
-
     public List<Comment> getComments() {
         return comments;
     }

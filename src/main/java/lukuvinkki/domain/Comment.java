@@ -9,16 +9,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "comment")
 public class Comment {
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", content='" + content + '\'' +
-                '}';
-    }
-
     @Id
     @GeneratedValue
     private long id;
