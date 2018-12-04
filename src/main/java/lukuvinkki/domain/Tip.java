@@ -3,10 +3,7 @@ package lukuvinkki.domain;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tip")
@@ -18,6 +15,7 @@ public class Tip {
     private String title;
     private String author;
     private String url;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private boolean status;
     
@@ -34,9 +32,15 @@ public class Tip {
             joinColumns = { @JoinColumn(name = "tip_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") }
     )
-
-    
     private Set<Tag> tags = new HashSet<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "post_id")
+    @OrderBy(value = "created desc")
+    private List<Comment> comments = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -105,6 +109,9 @@ public class Tip {
     }
 
     public void removeAllTags() {
+        for (Tag tag : tags) {
+            tag.getTips().remove(this);
+        }
         tags.clear();
     }
 
@@ -120,6 +127,16 @@ public class Tip {
         return this.rawTags;
     }
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setTip(this);
+    }
+
+
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 
     public String toString() {
         return String.format("Id: %d, Title: %s, Author; %s, Url: %s, Created: %s",

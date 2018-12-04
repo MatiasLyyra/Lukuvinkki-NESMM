@@ -1,5 +1,6 @@
 package lukuvinkki.controller;
 
+import lukuvinkki.domain.Comment;
 import lukuvinkki.domain.Tag;
 import lukuvinkki.domain.Tip;
 import lukuvinkki.repository.TagRepository;
@@ -96,6 +97,7 @@ public class TipController {
         if(!optional.isPresent()) return "error";
         Tip tip = optional.get();
         model.addAttribute("tip", tip);
+        model.addAttribute("newComment", new Comment());
         return "viewTip";
    }
     

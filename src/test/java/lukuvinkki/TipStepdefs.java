@@ -32,6 +32,11 @@ public class TipStepdefs extends AbstractStepdefs {
     private TagRepository tagRepository;
 
 
+    @Given("^user is on a tip a page$")
+    public void user_is_on_a_tip_page() {
+        driver.get(BASE_URL + "tips/" + dummyTip1.getId());
+    }
+
     @Given("^tip with title \"([^\"]*)\", author \"([^\"]*)\", url \"([^\"]*)\" and description \"([^\"]*)\" is created$")
     public void tip_with_given_fields_is_created(String title, String author, String url, String desc) throws Throwable {
         WebElement webElement = driver.findElement(By.linkText("lukuvinkki"));

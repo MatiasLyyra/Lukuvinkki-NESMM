@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +57,22 @@
             <tbody>
             </tbody>
         </table>
+        <br><br>
+        <form action="#" th:action="@{/comments/{tipId}/addComment(tipId=${tip.getId()})}" th:object="${newComment}" method="post">
+            <table>
+                <tr>
+                    <td>Nimi:</td>
+                    <td><input name="nickname" type="text" th:field="*{nickname}" /></td>
+                </tr>
+                <tr>
+                    <td>Kommentti:</td>
+                    <td><textarea name="content" type="text" th:field="*{content}"/></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Lähetä</button></td>
+                </tr>
+            </table>
+        </form>
         <br><br>
         <p>Katso lukuvinkit <a href="/tips">täältä</a></p>
         <p>Lisää uusi <a href="/addTip">lukuvinkki</a></p>
